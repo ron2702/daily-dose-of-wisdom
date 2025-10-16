@@ -4,6 +4,8 @@ This is a modern and robust quote generator built with **Next.js 15 (App Router)
 
 The primary focus of this project is to demonstrate **best practices in frontend architecture, efficient third-party API management, and core development concepts**.
 
+Check the live demo https://daily-dose-of-wisdom-swart.vercel.app/
+
 ---
 
 ## ✨ Key Features

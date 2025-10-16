@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react'; // <--- Importar useEffect
+import React, { useState, useCallback, useEffect } from 'react';
 import { Quote, FetchParams, SpecificCategory, FetchType } from '@/lib/types';
 import { fetchRandomQuote } from '@/lib/api';
 import { QuoteCard } from './QuoteCard';
 
 const categoryOptions: { label: string, fetchType: FetchType, category?: SpecificCategory }[] = [
-    { label: 'Famous Quotes', fetchType: 'quotes' },
-    { label: 'Anime Wisdom', fetchType: 'anime' },
+    { label: 'Wisdom of Legends', fetchType: 'quotes' },
+    { label: 'Shonen Philosophy', fetchType: 'anime' },
 ];
 
 const getFetchParams = (selectedLabel: string): FetchParams => {
@@ -69,15 +69,15 @@ export const QuoteGenerator: React.FC = () => {
   return (
         <section className="flex flex-col items-center w-full max-w-2xl">
             
-            <div className="mb-8 w-full">
-                <label htmlFor="quote-category" className="block text-lg font-medium text-gray-700 mb-2">
-                    Select Quote Category:
+            <div className="mb-8 w-full max-w-xs">
+                <label htmlFor="quote-category" className="block text-sm font-medium text-gray-300 mb-2">
+                    Choose Your Muse:
                 </label>
                 <select
                     id="quote-category"
                     onChange={handleCategoryChange}
                     value={selectedLabel}
-                    className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring-teal-500 text-gray-800"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-gray-200 rounded-lg shadow-sm focus:border-teal-500 focus:ring-teal-500"
                     disabled={isLoading}
                 >
                     {categoryOptions.map(opt => (
@@ -88,7 +88,7 @@ export const QuoteGenerator: React.FC = () => {
                 </select>
             </div>
             
-            {error && <p className="text-xl text-red-500 mb-4">{error}</p>}
+            {error && <p className="text-xl text-red-400 mb-4">{error}</p>}
             
             {quoteData && <QuoteCard quoteData={quoteData} isLoading={isLoading} />}
             
@@ -96,8 +96,8 @@ export const QuoteGenerator: React.FC = () => {
                 onClick={() => handleGenerateClick()}
                 disabled={isLoading}
                 className={`
-                    mt-8 px-8 py-3 rounded-full text-white text-lg font-semibold shadow-lg transition duration-300 ease-in-out
-                    ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700 transform hover:scale-105'}
+                    mt-8 px-8 py-3 rounded-full text-white text-lg font-semibold shadow-xl transition duration-300 ease-in-out
+                    ${isLoading ? 'bg-gray-600 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-500 transform hover:scale-105'}
                 `}
             >
                 {isLoading ? 'Loading...' : 'Generate New Quote'}

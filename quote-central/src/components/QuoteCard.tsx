@@ -23,7 +23,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quoteData, isLoading }) =>
     
     const cardClasses = `
         relative 
-        bg-white 
+        dark:bg-gray-800
         p-8 md:p-12 
         rounded-2xl 
         shadow-xl 
@@ -43,11 +43,12 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quoteData, isLoading }) =>
     }
 
     return (
-        <div className={cardClasses}>
+        <div className={cardClasses}> 
             <QuoteIcon />
             <div className="relative z-10">
                 <p 
-                    className="text-gray-800 text-2xl md:text-3xl italic font-serif text-center mb-6 leading-relaxed"
+                    // Texto principal más grande y centrado
+                    className="text-white text-2xl md:text-3xl italic font-serif text-center mb-6 leading-relaxed" 
                 >
                     {quoteData.quote}
                 </p>

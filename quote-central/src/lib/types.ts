@@ -1,14 +1,14 @@
-export type QuoteCategory = 'quotes' | 'animequotes' | 'developerquotes';
+export type FetchType = 'quotes' | 'anime';
+export type SpecificCategory = 'inspirational' | 'self-confidence' | 'success'
 
 export interface Quote {
-  id: number;
   quote: string;
   author: string;
-  category: string;
+  category?: string;
+  type?: string;
 }
 
-export interface ApiResponse {
-    quote: string;
-    author: string;
-    type: string;
+export interface FetchParams {
+    fetchType: FetchType;
+    category?: SpecificCategory;
 }

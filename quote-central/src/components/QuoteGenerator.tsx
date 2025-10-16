@@ -1,29 +1,15 @@
 'use client';
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { Quote, FetchParams, SpecificCategory, FetchType } from '@/lib/types';
+import { Quote, FetchParams } from '@/lib/types';
 import { fetchRandomQuote } from '@/lib/api';
-import { QuoteCard } from './QuoteCard';
-
-const categoryOptions: { label: string, fetchType: FetchType, category?: SpecificCategory }[] = [
-    { label: 'Wisdom of Legends', fetchType: 'quotes' },
-    { label: 'Shonen Philosophy', fetchType: 'anime' },
-];
-
-const getFetchParams = (selectedLabel: string): FetchParams => {
-    const option = categoryOptions.find(opt => opt.label === selectedLabel);
-
-    if (!option) return { fetchType: 'quotes' };
-
-    return { 
-        fetchType: option.fetchType, 
-        category: option.category 
-    };
-};
+import { QuoteCard } from '@/components/QuoteCard';
+import { categoryOptions, getFetchParams, INITIAL_QUOTE_LABEL } from '@/lib/helpers';
+import { CategorySelector } from '@/components/CategorySelector';
 
 export const QuoteGenerator: React.FC = () => {
 
-  const initialLabel = 'Famous Quotes';
+  const initialLabel = INITIAL_QUOTE_LABEL;
   const initialParams = getFetchParams(initialLabel);
 
   const [quoteData, setQuoteData] = useState<Quote | null>(null);
@@ -69,24 +55,11 @@ export const QuoteGenerator: React.FC = () => {
   return (
         <section className="flex flex-col items-center w-full max-w-2xl">
             
-            <div className="mb-8 w-full max-w-xs">
-                <label htmlFor="quote-category" className="block text-sm font-medium text-gray-300 mb-2">
-                    Choose Your Muse:
-                </label>
-                <select
-                    id="quote-category"
-                    onChange={handleCategoryChange}
-                    value={selectedLabel}
-                    className="w-full p-2 border border-gray-600 bg-gray-800 text-gray-200 rounded-lg shadow-sm focus:border-teal-500 focus:ring-teal-500"
-                    disabled={isLoading}
-                >
-                    {categoryOptions.map(opt => (
-                        <option key={opt.label} value={opt.label}>
-                            {opt.label}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <CategorySelector
+              selectedLabel={selectedLabel}
+              isLoading={isLoading}
+              onCategoryChange={handleCategoryChange}
+            />
             
             {error && <p className="text-xl text-red-400 mb-4">{error}</p>}
             
